@@ -1,0 +1,54 @@
+#1
+SELECT name, COUNT(*) AS count  
+FROM Passenger
+JOIN Pass_in_trip ON Passenger.id=Pass_in_trip.passenger
+GROUP BY passenger
+HAVING COUNT(trip) >= 1 
+ORDER BY COUNT(trip) DESC, name;
+
+#4
+SELECT classroom 
+FROM Schedule
+GROUP BY classroom
+HAVING COUNT(classroom) = (SELECT COUNT(classroom) 
+                           FROM Schedule 
+                           GROUP BY classroom
+                           ORDER BY COUNT(classroom) DESC LIMIT 1)
+
+#2
+SELECT DISTINCT TIMEDIFF((SELECT end_pair FROM Timepair WHERE id=4),(SELECT start_pair FROM Timepair WHERE id=2)) AS time
+
+#3
+SELECT DISTINCT Rooms.*
+FROM Rooms
+JOIN Reservations ON Rooms.id=Reservations.room_id
+WHERE WEEK(start_date, 1) = 12 AND YEAR(start_date)=2020;
+
+
+МАТЕМАТИКА
+
+#1
+Итак, после 6 раундов прокрутки у нас должны сыграть сектора: 1,2,3,4,5,6. порядок не важен. Каждый сектор играет один раз, потом сгорает.
+Поэтому P = 6/14 * 5/13 * 4/12 * 3/11 * 2/10 * 1/9 = 1/3003
+
+Вариант решения 2: 
+Всего существует С из 14 по 6 способов выбрать 6 секторов из 14 неупорядоченно и "без возвращений". Из них нам подходит только 1 т.е. с 1 по 6 секторов. 
+С из 14 по 6 = 3003 способов.
+P = 1/3003.
+
+Ответ: 1/3003
+
+
+Основы программирования
+
+#1
+def rosbank(nums, target):
+    for i in nums:
+        for j in nums:
+            if i+j == target:
+                return nums.index(i), nums.index(j)
+ 
+
+#2
+если честно, я не понял эту задачу. Код выше даёт первую пару подходящих чисел. Так как пара одна, то он и выдаст её индексы.
+
